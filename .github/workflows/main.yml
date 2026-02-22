@@ -1,4 +1,4 @@
-name: Email Identification Action
+name: Combined Cache and Email Action
 
 on: 
   push:
@@ -6,8 +6,35 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  # Job 1: Your Email Identification (Linux)
+  id-check:
     runs-on: ubuntu-latest
     steps:
       - name: 23f2004369@ds.study.iitm.ac.in
         run: echo "Hello, world! The action has been triggered."
+
+  # Job 2: Your Caching Task (Windows)
+  build-with-cache:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create dependency file
+        run: echo "cache-data" > seed.txt
+
+      - name: Cache dependencies
+        id: my-cache
+        uses: actions/cache@v4
+        with:
+          path: seed.txt
+          key: cache-9372622
+
+      - name: prime-cache-9372622
+        run: |
+          echo "Cache hit: ${{ steps.my-cache.outputs.cache-hit }}"
+          if ("${{ steps.my-cache.outputs.cache-hit }}" -eq "true") {
+            echo "Result: Cache was found!"
+          } else {
+            echo "Result: Cache miss."
+          }
