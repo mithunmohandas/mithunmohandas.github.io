@@ -40,7 +40,7 @@
     },
     "electronics": {
       "count": 6,
-      "inventoryValue": 185529.44
+      "inventoryValue": 185529.43999999998
     },
     "home": {
       "count": 6,
@@ -53,5 +53,6 @@
   }
 
 }
+
 
 
