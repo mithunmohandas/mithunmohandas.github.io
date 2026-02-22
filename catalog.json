@@ -30,6 +30,10 @@
     {"id": "prod-386766d8-024", "name": "Elite Item 24", "category": "clothing", "price": 195.15, "stock": 129, "rating": 3.7}
   ],
   "aggregations": {
+    "books": {
+      "count": 2,
+      "inventoryValue": 87903.73
+    },
     "clothing": {
       "count": 7,
       "inventoryValue": 167230.12
@@ -37,7 +41,16 @@
     "electronics": {
       "count": 6,
       "inventoryValue": 185529.44
+    },
+    "home": {
+      "count": 6,
+      "inventoryValue": 64449.61
+    },
+    "sports": {
+      "count": 3,
+      "inventoryValue": 20611.32
     }
   }
 
 }
+
