@@ -1,0 +1,34 @@
+name: Windows Cache Test
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Create a dummy file to cache if it doesn't exist
+      - name: Create dependency file
+        run: echo "cache-data" > seed.txt
+
+      - name: Cache dependencies
+        id: my-cache
+        uses: actions/cache@v4
+        with:
+          path: seed.txt
+          key: cache-9372622
+
+      - name: prime-cache-9372622
+        run: |
+          echo "Cache hit: ${{ steps.my-cache.outputs.cache-hit }}"
+          if ("${{ steps.my-cache.outputs.cache-hit }}" -eq "true") {
+            echo "Result: Cache was found!"
+          } else {
+            echo "Result: Cache miss - this is expected on the first run."
+          }
